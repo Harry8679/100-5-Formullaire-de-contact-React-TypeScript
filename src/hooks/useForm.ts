@@ -34,7 +34,7 @@ export const useForm = () => {
     validateFieldOnChange,
     handleBlur,
     resetValidation,
-    isValid,
+    // isValid,
   } = useValidation(validationRules);
 
   const handleChange = useCallback(
@@ -101,6 +101,13 @@ export const useForm = () => {
     setSubmitError(null);
   }, [resetValidation]);
 
+  const isFormValid =
+  Object.values(errors).every((error) => !error) &&
+  formData.name &&
+  formData.email &&
+  formData.subject &&
+  formData.message;
+
   return {
     formData,
     errors,
@@ -108,7 +115,7 @@ export const useForm = () => {
     isSubmitting,
     submitSuccess,
     submitError,
-    isFormValid: isValid(formData),
+    isFormValid,
     handleChange,
     handleBlur,
     handleSubmit,
