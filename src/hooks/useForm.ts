@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { FormData } from '../types';
+import type { FormData } from '../types';
 import { useValidation } from './useValidation';
 import { validators } from '../utils/validators';
 
