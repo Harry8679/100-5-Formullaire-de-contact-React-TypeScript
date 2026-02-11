@@ -33,7 +33,7 @@ export const ContactForm = () => {
       {submitSuccess && (
         <div className="mb-6 p-6 bg-green-50 border-2 border-green-500 rounded-xl animate-slide-in">
           <div className="flex items-start gap-3">
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               <svg className="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fillRule="evenodd"
@@ -50,7 +50,7 @@ export const ContactForm = () => {
             </div>
             <button
               onClick={() => window.location.reload()}
-              className="flex-shrink-0 text-green-600 hover:text-green-700"
+              className="shrink-0 text-green-600 hover:text-green-700"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
