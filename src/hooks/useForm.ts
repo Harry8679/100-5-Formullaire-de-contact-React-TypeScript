@@ -101,12 +101,12 @@ export const useForm = () => {
     setSubmitError(null);
   }, [resetValidation]);
 
-  const isFormValid =
+  const isFormValid = Boolean(
   Object.values(errors).every((error) => !error) &&
   formData.name &&
   formData.email &&
   formData.subject &&
-  formData.message;
+  formData.message);
 
   return {
     formData,
