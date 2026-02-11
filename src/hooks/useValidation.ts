@@ -1,8 +1,8 @@
 import { useState, useCallback } from 'react';
-import { FormErrors, FormTouched } from '../types';
+import type { FormErrors, FormTouched, FormData } from '../types';
 
 interface ValidationRules {
-  [key: string]: (value: any) => string | undefined;
+  [key: string]: (value: string | boolean) => string | undefined;
 }
 
 export const useValidation = (rules: ValidationRules) => {
@@ -10,7 +10,7 @@ export const useValidation = (rules: ValidationRules) => {
   const [touched, setTouched] = useState<FormTouched>({});
 
   const validateField = useCallback(
-    (name: string, value: any): string | undefined => {
+    (name: string, value: string | boolean): string | undefined => {
       const validator = rules[name];
       if (validator) {
         return validator(value);
@@ -21,11 +21,12 @@ export const useValidation = (rules: ValidationRules) => {
   );
 
   const validateForm = useCallback(
-    (formData: any): FormErrors => {
+    (formData: FormData): FormErrors => {
       const newErrors: FormErrors = {};
 
       Object.keys(rules).forEach((fieldName) => {
-        const error = validateField(fieldName, formData[fieldName]);
+        const fieldValue = formData[fieldName as keyof FormData];
+        const error = validateField(fieldName, fieldValue);
         if (error) {
           newErrors[fieldName as keyof FormErrors] = error;
         }
@@ -38,7 +39,7 @@ export const useValidation = (rules: ValidationRules) => {
   );
 
   const validateFieldOnChange = useCallback(
-    (name: string, value: any) => {
+    (name: string, value: string | boolean) => {
       if (touched[name as keyof FormTouched]) {
         const error = validateField(name, value);
         setErrors((prev) => ({
@@ -62,7 +63,7 @@ export const useValidation = (rules: ValidationRules) => {
     setTouched({});
   }, []);
 
-  const isValid = useCallback((formData: any): boolean => {
+  const isValid = useCallback((formData: FormData): boolean => {
     const formErrors = validateForm(formData);
     return Object.keys(formErrors).length === 0;
   }, [validateForm]);
