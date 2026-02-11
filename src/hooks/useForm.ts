@@ -14,11 +14,11 @@ const initialFormData: FormData = {
 };
 
 const validationRules = {
-  name: validators.name,
-  email: validators.email,
-  phone: validators.phone,
-  subject: validators.subject,
-  message: validators.message,
+  name: (value: string | boolean) => typeof value === 'string' ? validators.name(value) : undefined,
+  email: (value: string | boolean) => typeof value === 'string' ? validators.email(value) : undefined,
+  phone: (value: string | boolean) => typeof value === 'string' ? validators.phone(value) : undefined,
+  subject: (value: string | boolean) => typeof value === 'string' ? validators.subject(value) : undefined,
+  message: (value: string | boolean) => typeof value === 'string' ? validators.message(value) : undefined,
 };
 
 export const useForm = () => {
@@ -84,7 +84,8 @@ export const useForm = () => {
         setSubmitSuccess(true);
         setFormData(initialFormData);
         resetValidation();
-      } catch (error) {
+      } catch {
+        // ✅ Suppression de (error) car non utilisé
         setSubmitError('Une erreur est survenue. Veuillez réessayer.');
       } finally {
         setIsSubmitting(false);
