@@ -64,7 +64,7 @@ export const ContactForm = () => {
       {submitError && (
         <div className="mb-6 p-6 bg-red-50 border-2 border-red-500 rounded-xl animate-shake">
           <div className="flex items-start gap-3">
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               <svg className="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fillRule="evenodd"
