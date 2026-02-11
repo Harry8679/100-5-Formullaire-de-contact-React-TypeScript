@@ -1,4 +1,4 @@
-import { FormFieldProps } from '../types';
+import type { FormFieldProps } from '../types';
 
 export const FormField = ({ label, name, error, touched, required, children }: FormFieldProps) => {
   const showError = touched && error;
