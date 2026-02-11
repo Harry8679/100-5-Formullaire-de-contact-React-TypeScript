@@ -1,4 +1,4 @@
-import { TextAreaProps } from '../types';
+import type { TextAreaProps } from '../types';
 
 export const TextArea = ({
   name,
